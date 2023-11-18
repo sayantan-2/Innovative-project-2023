@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TicTacToe</title>
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="styles/tictactoe.css" type="text/css">
+    <link rel="stylesheet" href="styles/dark-mode-toggle.css" type="text/css">
+</head>
+
+<body>
+    <input type="checkbox" id="show-help-dialog" value="false" style="display:none;">
+    <div id="body">
+        <div id="tictactoe-header">
+            <h1>TicTacToe</h1>
+            <div id="dark-mode-toggle"></div>
+        </div>
+        <div id="tictactoe-ctrl">
+            <div class="select">
+                <select id="tttctrl__mode" title="Select game mode">
+                    <option value="pvc_easy">PvC | Easy</option>
+                    <option value="pvc_medium" selected="selected">PvC | Medium</option>
+                    <option value="pvc_impossible">PvC | Impossible</option>
+                    <option value="pvp">Player vs Player</option>
+                </select>
+            </div>
+            <div class="buttons">
+                <button class="button" id="tttctrl__restart" title="Start a new game">Restart</button>
+                <label class="button" for="show-help-dialog" title="Show help dialog">?</label>
+            </div>
+        </div>
+        <div id="tictactoe-stats">
+            <div id="ttts__x" data-value="0" title="cross wins"></div>
+            <div id="ttts__o" data-value="0" title="circle wins"></div>
+            <div id="ttts__draw" data-value="0" title="draws"></div>
+            <button class="button" id="tttctrl__reset-stats" title="Reset Win Stats">R</button>
+        </div>
+        <div id="tictactoe-advisor" data-advisor="empty">
+            <div class="ttta__x-won"><span>Winner!</span></div>
+            <div class="ttta__x-won-comp"><span>Winner! (Comp)</span></div>
+            <div class="ttta__x-turn"><span>Turn</span></div>
+            <div class="ttta__x-turn-switch"><span>Turn</span><button class="button" id="tttctrl__switch"
+                    title="Play as Circle (o)"></button></div>
+            <div class="ttta__x-turn-comp"><span>Turn (Comp)</span></div>
+            <div class="ttta__o-won"><span>Winner!</span></div>
+            <div class="ttta__o-won-comp"><span>Winner! (Comp)</span></div>
+            <div class="ttta__o-turn"><span>Turn</span></div>
+            <div class="ttta__o-turn-comp"><span>Turn (Comp)</span></div>
+            <div class="ttta__draw"><span>Draw!</span></div>
+            <noscript>JS is required to run this game!</noscript>
+        </div>
+        <div id="tictactoe" data-active-player="empty">
+            <!-- row 1 -->
+            <div class="tictactoe__row">
+                <button id="tttf__7" data-state="empty"></button>
+                <button id="tttf__8" data-state="empty"></button>
+                <button id="tttf__9" data-state="empty"></button>
+            </div>
+
+            <!-- row 2 -->
+            <div class="tictactoe__row">
+                <button id="tttf__4" data-state="empty"></button>
+                <button id="tttf__5" data-state="empty"></button>
+                <button id="tttf__6" data-state="empty"></button>
+            </div>
+
+            <!-- row 3 -->
+            <div class="tictactoe__row">
+                <button id="tttf__1" data-state="empty"></button>
+                <button id="tttf__2" data-state="empty"></button>
+                <button id="tttf__3" data-state="empty"></button>
+            </div>
+        </div>
+        <div id="tictactoe-help">
+            <label class="background" for="show-help-dialog"></label>
+            <div class="content">
+                <label class="button" for="show-help-dialog" title="Close this dialog">X</label>
+                <h2 class="how-to-play">How to play</h2>
+                <h3>Player vs Computer</h3>
+                <p>You can select between the modes "Easy", "Medium" and "Impossible". To begin playing, make a first
+                    move as cross or click on the circle button to let the Computer make the first move. Then, try to
+                    place your circles or crosses in a way the Computer can't defend itself anymore. Winner is the
+                    player who has three of his symbols in a row, either horizontal, vertical or diagonal. At any time
+                    you can click on Restart or change the game mode to start a new game. Have fun!</p>
+                <h3>Player vs Player</h3>
+                <p>Basically the same as the Player vs Computer modes, but in this case every move (cross + circle) is
+                    made by a human player. Play against your friend and have fun!</p>
+                <h2 class="keyboard-shortcuts">Keyboard Shortcuts</h2>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">?</span></td>
+                        <td>Show this help dialog.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">r</span></td>
+                        <td>Restart the game.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">shift</span>+<span class="key multi">r</span></td>
+                        <td>Reset the win stats.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">o</span>or<span class="key multi">0</span></td>
+                        <td>Play as Circle (PvC game mode only).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">1</span>...<span class="key multi">9</span></td>
+                        <td>Make a move on the field with the pressed number (NumPad or default).<br>Structure of the
+                            game field:<br>7 8 9<br>4 5 6<br>1 2 3</td>
+                    </tr>
+                </table>
+                <div style="min-height:1px;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/DarkModeToggle.js"></script>
+    <script src="scripts/TicTacToe.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

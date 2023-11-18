@@ -1,0 +1,43 @@
+/*!tictactoe-dark.css
+ * Dark style for project TicTacToe.
+ */
+
+:root {
+    --page-cross-color: #db9a0f;
+    --page-circle-color: #20db0f;
+    --page-bg-color: #222;
+    --page-text-color: #eee;
+
+    --button-bg-color: #444;
+    --button-border-color-hover-active: #666;
+
+    --noscript-text-color: #ff0000;
+
+    --select-bg-color: #111;
+    --select-border-color-hover-active: var(--button-border-color-hover-active);
+    --select-filter--after: invert();
+
+    --scrollbar-thumb-color: #444;
+    --scrollbar-track-color: var(--page-bg-color);
+
+    --ttt-bg-color: #333;
+    --ttt-button-bg-color: var(--page-bg-color);
+    --ttt-button-bg-color-hover: #111;
+    --ttt-button-border-color-hover: var(--button-border-color-hover-active);
+    --ttt-button-set-bg-color: #111;
+    --ttt-button-x-won-border-color: var(--page-cross-color);
+    --ttt-button-o-won-border-color: var(--page-circle-color);
+
+    --ttts-field-bg-color: #111;
+
+    --ttta-button-bg-color: #111;
+    --ttta-divider-border-color: #444;
+
+    --ttth-bg-color: #111;
+    --ttth-border-color: #666;
+    --ttth-border-children-color: #444;
+    --ttth-howtoplay-text-color: var(--page-cross-color);
+    --ttth-key-bg-color: #333;
+    --ttth-keyboardshortcut-text-color: var(--page-circle-color);
+    --ttth-wrapper-bg-color: rgba(0,0,0,0.65);
+}

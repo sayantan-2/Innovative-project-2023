@@ -1,0 +1,516 @@
+/*!tictactoe.css
+ * Contains all design definitions as well as the light theme (default) for the
+ * project TicTacToe.
+ */
+
+:root {
+    --page-cross-color: #db9a0f;
+    --page-circle-color: #20db0f;
+    --page-bg-color: #ddd;
+    --page-text-color: #000;
+
+    --button-bg-color: #bbb;
+    --button-border-color-hover-active: #777;
+
+    --noscript-text-color: #ff0000;
+
+    --select-bg-color: #eee;
+    --select-border-color-hover-active: var(--button-border-color-hover-active);
+    --select-filter--after: none;
+
+    --scrollbar-thumb-color: #bbb;
+    --scrollbar-track-color: var(--page-bg-color);
+
+    --ttt-bg-color: #bbb;
+    --ttt-button-bg-color: var(--page-bg-color);
+    --ttt-button-bg-color-hover: #eee;
+    --ttt-button-border-color-hover: var(--button-border-color-hover-active);
+    --ttt-button-set-bg-color: #eee;
+    --ttt-button-x-won-border-color: var(--page-cross-color);
+    --ttt-button-o-won-border-color: var(--page-circle-color);
+
+    --ttts-field-bg-color: #eee;
+
+    --ttta-button-bg-color: #eee;
+    --ttta-divider-border-color: #bbb;
+
+    --ttth-bg-color: #eee;
+    --ttth-border-color: #bbb;
+    --ttth-border-children-color: var(--ttth-border-color);
+    --ttth-howtoplay-text-color: var(--page-cross-color);
+    --ttth-key-bg-color: #ccc;
+    --ttth-keyboardshortcut-text-color: var(--page-circle-color);
+    --ttth-wrapper-bg-color: rgba(0,0,0,0.35);
+}
+
+/* #region Basic Styles */
+html,body{height:100%;}
+body {
+    background-color: var(--page-bg-color);
+    color: var(--page-text-color);
+    font-family: Tahoma, Geneva, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+.button {
+    background-color: var(--button-bg-color);
+    border: 4px solid transparent;
+    border-radius: 4px;
+    color: var(--page-text-color);
+    cursor: pointer;
+    font-size: 0.83em;
+    outline: none;
+    padding: 6px 12px;
+    transition: 200ms ease;
+    user-select: none;
+}
+.button:hover {
+    border-color: var(--button-border-color-hover-active);
+}
+.button:active {
+    background-color: var(--button-border-color-hover-active);
+    transform: translateY(2px);
+}
+::-moz-focus-inner {border:0;}
+.select {
+    background-color: var(--select-bg-color);
+    border: 4px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: 200ms ease;
+}
+.select > select {
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.83em;
+    outline: none;
+    padding: 6px 24px 6px 6px;
+}
+.select:hover {
+    border-color: var(--select-border-color-hover-active);
+}
+.select:active {
+    background-color: var(--select-border-color-hover-active);
+}
+.select::after {
+    background-image: url(../media/dropdown-arrow.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    content: "";
+    display: block;
+    filter: var(--select-filter--after);
+    height: 12px;
+    pointer-events: none !important;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-6px, -50%);
+    width: 12px;
+}
+.select > select option {
+    background-color: var(--select-bg-color);
+    color: var(--page-text-color);
+}
+#body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    width: 100%;
+    max-width: 300px;
+}
+/* #endregion Basic Styles */
+
+/* #region TicTacToe Game Field */
+#tictactoe {
+    background-color: var(--ttt-bg-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0;
+    padding: 6px;
+    width: 240px;
+}
+#tictactoe > .tictactoe__row {
+    display: flex;
+    flex-direction: row;
+}
+#tictactoe > .tictactoe__row > button {
+    background-color: var(--ttt-button-bg-color);
+    border: 4px solid transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    height: 64px;
+    margin: 6px;
+    outline: none;
+    position: relative;
+    transition: 200ms ease;
+    width: 64px;
+}
+#tictactoe > .tictactoe__row > button[data-state="cross"],
+#tictactoe > .tictactoe__row > button[data-state="circle"] {
+    background-color: var(--ttt-button-set-bg-color);
+}
+#tictactoe > .tictactoe__row > button[data-state="cross"].won {
+    border-color: var(--ttt-button-x-won-border-color);
+}
+#tictactoe > .tictactoe__row > button[data-state="circle"].won {
+    border-color: var(--ttt-button-o-won-border-color);
+}
+#tictactoe:not([data-active-player="empty"]) > .tictactoe__row > button[data-state="empty"]:hover {
+    background-color: var(--ttt-button-bg-color-hover);
+    border-color: var(--ttt-button-border-color-hover);
+    cursor: pointer;
+}
+#tictactoe:not([data-active-player="empty"]) > .tictactoe__row > button[data-state="empty"]:active {
+    transform: translateY(2px);
+}
+#tictactoe[data-active-player="cross"] > .tictactoe__row > button[data-state="empty"]:hover::after {
+    background-image: url(../media/cross.svg);
+    opacity: 0.35;
+}
+#tictactoe[data-active-player="circle"] > .tictactoe__row > button[data-state="empty"]:hover::after {
+    background-image: url(../media/circle.svg);
+    opacity: 0.35;
+}
+#tictactoe > .tictactoe__row > button::after {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 75% 75%;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#tictactoe > .tictactoe__row > button[data-state="cross"]::after {
+    background-image: url(../media/cross.svg);
+}
+#tictactoe > .tictactoe__row > button[data-state="circle"]::after {
+    background-image: url(../media/circle.svg);
+}
+/* #endregion TicTacToe Game Field */
+
+/* #region TicTacToe Header */
+#tictactoe-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+/* #endregion TicTacToe Header */
+
+/* #region TicTacToe Ctrl */
+#tictactoe-ctrl {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 8px 0;
+    width: 100%;
+}
+#tictactoe-ctrl > .buttons {
+    display: flex;
+    flex-direction: row;
+}
+#tictactoe-ctrl > .buttons > .button:nth-child(1) {
+    margin-right: 8px;
+}
+/* #endregion TicTacToe Ctrl */
+
+/* #region TicTacToe Stats */
+#tictactoe-stats {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 8px 0;
+    width: 100%;
+}
+#tictactoe-stats > div {
+    background-color: var(--ttts-field-bg-color);
+    border-radius: 4px;
+    display: inline-block;
+    height: 24px;
+    padding: 4px;
+}
+#tictactoe-stats > div::before {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 75% 75%;
+    content: "";
+    display: inline-block;
+    height: 24px;
+    vertical-align: top;
+    width: 24px;
+}
+#tictactoe-stats > div#ttts__x::before {
+    background-image: url(../media/cross.svg);
+}
+#tictactoe-stats > div#ttts__o::before {
+    background-image: url(../media/circle.svg);
+}
+#tictactoe-stats > div#ttts__draw::before {
+    background-image: url(../media/draw.svg);
+}
+#tictactoe-stats > div::after {
+    content: attr(data-value);
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 8px;
+    transition: 200ms ease;
+    vertical-align: top;
+}
+#tictactoe-stats > button.button {
+    height: 32px;
+    padding: 4px;
+    width: 32px;
+}
+/* #endregion TicTacToe Stats */
+
+/* #region TicTacToe Advisor */
+#tictactoe-advisor {
+    cursor: default;
+    display: block;
+    height: 36px;
+    margin: 8px 0;
+    position: relative;
+    width: 100%;
+}
+#tictactoe-advisor > div {
+    align-items: center;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: 600;
+    left: 50%;
+    opacity: 0.0;
+    position: absolute;
+    top: 50%;
+    transition: 200ms ease;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    z-index: 0;
+}
+#tictactoe-advisor:not([data-advisor="draw"]) > div::before {
+    /* -webkit-mask: no-repeat;
+    mask: no-repeat; */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    content: "";
+    display: block;
+    height: 24px;
+    margin: 0 6px 0 0;
+    width: 24px;
+}
+#tictactoe-advisor[data-advisor="x_won"] > div.ttta__x-won::before,
+#tictactoe-advisor[data-advisor="x_won_comp"] > div.ttta__x-won-comp::before,
+#tictactoe-advisor[data-advisor="x_turn"] > div.ttta__x-turn::before,
+#tictactoe-advisor[data-advisor="x_turn_switch"] > div.ttta__x-turn-switch::before,
+#tictactoe-advisor[data-advisor="x_turn_comp"] > div.ttta__x-turn-comp::before {
+    /* background-color: var(--page-cross-color);
+    -webkit-mask-image: url(../media/cross.svg);
+    mask-image: url(../media/cross.svg); */
+    background-image: url(../media/cross.svg);
+}
+#tictactoe-advisor[data-advisor="o_won"] > div.ttta__o-won::before,
+#tictactoe-advisor[data-advisor="o_won_comp"] > div.ttta__o-won-comp::before,
+#tictactoe-advisor[data-advisor="o_turn"] > div.ttta__o-turn::before,
+#tictactoe-advisor[data-advisor="o_turn_comp"] > div.ttta__o-turn-comp::before {
+    /* background-color: var(--page-circle-color);
+    -webkit-mask-image: url(../media/circle.svg);
+    mask-image: url(../media/circle.svg); */
+    background-image: url(../media/circle.svg);
+}
+#tictactoe-advisor > div > #tttctrl__switch {
+    background-color: var(--ttta-button-bg-color);
+    background-image: url(../media/circle.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    display: block;
+    height: 36px;
+    margin: 0 0 0 24px;
+    padding: 0;
+    width: 36px;
+}
+#tictactoe-advisor:not([data-advisor="draw"]) > div > span {
+    border-left: 2px solid var(--ttta-divider-border-color);
+    display: block;
+    padding: 0 0 0 6px;
+}
+#tictactoe-advisor[data-advisor="x_won"] > div.ttta__x-won,
+#tictactoe-advisor[data-advisor="x_won_comp"] > div.ttta__x-won-comp,
+#tictactoe-advisor[data-advisor="x_turn"] > div.ttta__x-turn,
+#tictactoe-advisor[data-advisor="x_turn_switch"] > div.ttta__x-turn-switch,
+#tictactoe-advisor[data-advisor="x_turn_comp"] > div.ttta__x-turn-comp,
+#tictactoe-advisor[data-advisor="o_won"] > div.ttta__o-won,
+#tictactoe-advisor[data-advisor="o_won_comp"] > div.ttta__o-won-comp,
+#tictactoe-advisor[data-advisor="o_turn"] > div.ttta__o-turn,
+#tictactoe-advisor[data-advisor="o_turn_comp"] > div.ttta__o-turn-comp,
+#tictactoe-advisor[data-advisor="draw"] > div.ttta__draw {
+    opacity: 1.0;
+    z-index: 1;
+}
+#tictactoe-advisor > noscript {
+    align-items: center;
+    color: var(--noscript-text-color);
+    display: flex;
+    flex-direction: center;
+    font-style: italic;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+/* #endregion TicTacToe Advisor */
+
+/* #region TicTacToe Help */
+#tictactoe-help {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    opacity: 0;
+    position: fixed;
+    transition: 200ms ease;
+    width: 100%;
+    z-index: -1;
+}
+#show-help-dialog:checked ~ #body #tictactoe-help {
+    opacity: 1;
+    z-index: 9000;
+}
+#tictactoe-help > .background {
+    background-color: var(--ttth-wrapper-bg-color);
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+#tictactoe-help > .content {
+    background-color: var(--ttth-bg-color);
+    border: 4px solid var(--ttth-border-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.83em;
+    height: calc(100% - 8px);
+    max-height: 600px;
+    overflow-y: auto;
+    position: relative;
+    width: calc(100% - 8px);
+    max-width: 800px;
+}
+#tictactoe-help > .content > * {
+    margin: 0 16px 0 16px;
+}
+#tictactoe-help > .content > .button {
+    align-self: flex-end;
+    font-size: inherit;
+    margin: 16px 16px 0 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#tictactoe-help > .content > h2 {
+    border-bottom: 2px solid var(--ttth-border-children-color);
+    font-size: 1.2em;
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+}
+#tictactoe-help > .content > h2:nth-child(n) {
+    margin-top: 16px;
+}
+#tictactoe-help > .content > h2.how-to-play {
+    color: var(--ttth-howtoplay-text-color);
+}
+#tictactoe-help > .content > h2.keyboard-shortcuts {
+    color: var(--ttth-keyboardshortcut-text-color);
+}
+#tictactoe-help > .content > h3 {
+    font-size: inherit;
+    margin-bottom: 8px;
+}
+#tictactoe-help > .content > p {
+    font-size: inherit;
+    margin-bottom: 16px;
+}
+#tictactoe-help > .content > p + h2 {
+    margin-top: 16px;
+}
+#tictactoe-help > .content > table {
+    border-collapse: collapse;
+    font-size: inherit;
+    margin-bottom: 16px;
+    text-align: left;
+}
+#tictactoe-help > .content > table td,
+#tictactoe-help > .content > table th {
+    border: 1px solid var(--ttth-border-children-color);
+    border-left: none;
+    border-right: none;
+    font-size: inherit;
+    padding: 8px 16px 8px 0;
+}
+#tictactoe-help > .content > table th {
+    border-top: none;
+    padding-top: 0px;
+}
+#tictactoe-help > .content .key {
+    background-color: var(--ttth-key-bg-color);
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-right: 8px;
+    padding: 4px 8px;
+}
+#tictactoe-help > .content .key.multi {
+    margin-left: 8px;
+}
+/* #endregion TicTacToe Help */
+
+/* #region Footer */
+#footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 16px 0;
+}
+/* #endregion Footer */
+
+/* #region Custom Scrollbar */
+/** For Firefox Browser **/
+:root {
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+/** For Chromium-based browsers **/
+::-webkit-scrollbar {
+    width: initial;
+}
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-color);
+}
+/* #endregion Custom Scrollbar */
